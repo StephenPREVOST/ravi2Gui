@@ -5,26 +5,27 @@ class Gui(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        self.initUI()
 
     def initUI(self):
         self.statusBar().showMessage('Ready')
 
         menubar = self.menuBar()
-        fichierMenu = menubar.add("Fichier")
+        fichierMenu = menubar.addMenu("Fichier")
 
         openAct = QAction("ouvrir",self)
         openAct.triggered.connect(self.open)
-        openAct.detShortcut("O")
+        openAct.setShortcut("O")
         openAct.setStatusTip("Ouvrir un fichier")
 
         recAct = QAction("Enregistrer", self)
         recAct.triggered.connect(self.rec)
-        recAct.detShortcut("S")
+        recAct.setShortcut("S")
         recAct.setStatusTip("Sauvegarder")
 
         quitAct = QAction("Quitter", self)
         quitAct.triggered.connect(self.quit)
-        quitAct.detShortcut("C")
+        quitAct.setShortcut("C")
         quitAct.setStatusTip("Fermer la fenêtre")
 
         fichierMenu.addAction(openAct)
@@ -44,7 +45,7 @@ class Gui(QMainWindow):
 
     def quit(self):
         print("quit")
-        self.quit
+
 
 
 
