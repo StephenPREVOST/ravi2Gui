@@ -13,7 +13,7 @@ class Gui(QMainWindow):
         self.statusBar().showMessage('Ready')
 
         self.setGeometry(300, 300, 250, 150)
-        self.setWindowTitle('RAVI2')
+        self.setWindowTitle('RAVI_2')
         self.show()
 
 
