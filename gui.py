@@ -110,8 +110,32 @@ class MyTableWidget(QWidget):
         self.layout.addWidget(self.tabs)
         self.setLayout(self.layout)
 
+
+    #Dictionnaire
     def saveClick(self):
         print("save")
+        dictionnaire = {}
+
+        if self.tableWidget.item(0,1):
+            dictionnaire["nom"] = self.tableWidget.item(0, 1).text()
+        if self.tableWidget.item(1, 1):
+            dictionnaire["prénom"] = self.tableWidget.item(1, 1).text()
+        if self.tableWidget.item(2, 1):
+            dictionnaire["date de naissance"] = self.tableWidget.item(2, 1).text()
+        if self.tableWidget.item(3, 1):
+            dictionnaire["sexe"] = self.tableWidget.item(3, 1).text()
+        if self.tableWidget.item(4, 1):
+            dictionnaire["taille"] = self.tableWidget.item(4, 1).text()
+        if self.tableWidget.item(5, 1):
+            dictionnaire["poid"] = self.tableWidget.item(5, 1).text()
+
+        # save Tableau Onglet 2
+        import json
+        with open("data.json", "w") as info_personnelle:
+            json.dump(dictionnaire, info_personnelle)
+
+
+        print(dictionnaire)
 
     def openClick(self):
         print("click")
