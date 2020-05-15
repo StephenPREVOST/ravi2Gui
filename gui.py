@@ -8,6 +8,7 @@ class Gui(QMainWindow):
         super().__init__()
         self.initUI()
 
+
     def initUI(self):
         self.statusBar().showMessage('Ready')
 
@@ -82,16 +83,16 @@ class MyTableWidget(QWidget):
         self.tab1.setLayout(self.tab1.layout)
         self.tab1.setStyleSheet("background-image: url(./flooop.png); background-attachment: fixed;")
 
-        #Tab 2
+        # Tab 2:
         self.tableWidget = QTableWidget()
         self.tableWidget.setRowCount(6)
         self.tableWidget.setColumnCount(2)
 
         self.tab2.layout = QVBoxLayout(self)
-        self.tab2.addWidget(self.tableWidget)
-        self.tab2.setLayout(self.tab2.Layout)
+        self.tab2.layout.addWidget(self.tableWidget)
+        self.tab2.setLayout(self.tab2.layout)
 
-        self.tableWidget.setItem(0, 0, QTableWidgetItem("Nom:"))
+        self.tableWidget.setItem(0, 0, QTableWidgetItem("nom:"))
         self.tableWidget.setItem(1, 0, QTableWidgetItem("Prenom:"))
         self.tableWidget.setItem(2, 0, QTableWidgetItem("Date de naissance:"))
         self.tableWidget.setItem(3, 0, QTableWidgetItem("Sexe:"))
