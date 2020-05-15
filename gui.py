@@ -1,4 +1,9 @@
-from PyQt5.QtWidgets import QMainWindow, QAction
+from PyQt5.QtWidgets import QMainWindow, QAction, QWidget, QTabWidget, QVBoxLayout, QPushButton
+
+
+class MyTableWidget(QWidget):
+        pass
+
 
 
 class Gui(QMainWindow):
@@ -6,9 +11,14 @@ class Gui(QMainWindow):
     def __init__(self):
         super().__init__()
         self.initUI()
+        self.title = 'RAVI 2'
+        self.statusBar().showMessage('Ready')
+
+        self.show()
+
+
 
     def initUI(self):
-        self.statusBar().showMessage('Ready')
 
         menubar = self.menuBar()
         fichierMenu = menubar.addMenu("Fichier")
@@ -35,6 +45,8 @@ class Gui(QMainWindow):
         self.setGeometry(300, 300, 1280, 720)
 
         self.setWindowTitle('RAVI_2')
+
+
         self.show()
 
     def open(self):
