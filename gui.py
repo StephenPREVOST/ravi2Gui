@@ -1,79 +1,49 @@
-from PyQt5.QtWidgets import QMainWindow, QAction, QTabWidget, QWidget, QVBoxLayout, QPushButton
-
-
-class OpenButton():
-    pass
-
-
-class MyTableWidget(QWidget):
-    pass
+from PyQt5.QtWidgets import QMainWindow, QAction, QWidget, QVBoxLayout, QTabWidget, QPushButton, \
+    QInputDialog, QLineEdit, QTableWidget, QTableWidgetItem
 
 
 class Gui(QMainWindow):
 
-    def __init__(self, parent):
+    def __init__(self):
         super().__init__()
         self.initUI()
-        self.title = 'RAVI 2'
-        self.statusBar().showMessage('Ready')
-        self.setWindowTitle(self.title)
-
-        self.table_widget = MyTableWidget(self)
-        self.setCentralWidget(self.table_widget)
-
-        self.show()
-
-        super(QWidget, self).__init__(parent)
-        self.layout = QVBoxLayout(self)
-
-        # Initialize tab screen
-        self.tabs = QTabWidget()
-        self.tab1 = QWidget()
-        self.tab2 = QWidget()
-
-        self.tabs.addTab(self.tab1, "Onglet 1")
-        self.tabs.addTab(self.tab2, "Onglet 2")
-
-        # Create first tab
-        self.tab1.layout = QVBoxLayout(self)
-        openButton = QPushButton("Nom ?")
-        openButton.clicked.connect(self.openclick)
-
-        self.tab1.layout.addWidget(openButton)
-        self.tab1.setLayout(self.tab1.layout)
-        self.tab1.setStyleSheet(("background-image: url(./flooop.png); background-attachment: fixed;"))
-
-        # Add tabs to widget
-        self.layout.addWidget(self.tabs)
-        self.setLayout(self.layout)
-
 
     def initUI(self):
+        self.statusBar().showMessage('Ready')
+
         menubar = self.menuBar()
         fichierMenu = menubar.addMenu("Fichier")
 
-        openAct = QAction("ouvrir", self)
+        openAct = QAction("Ouvrir",self)
         openAct.triggered.connect(self.open)
-        openAct.setShortcut("O")
-        openAct.setStatusTip("Ouvrir un fichier")
+        openAct.setShortcut('ctrl+O')
+        openAct.setStatusTip('Ouvrir un fichier')
 
-        recAct = QAction("Enregistrer", self)
+        recAct = QAction("Enregistrer",self)
         recAct.triggered.connect(self.rec)
-        recAct.setShortcut("S")
-        recAct.setStatusTip("Sauvegarder")
+        recAct.setShortcut('ctrl+S')
+        recAct.setStatusTip('Enregistrer un fichier')
 
-        quitAct = QAction("Quitter", self)
-        quitAct.triggered.connect(self.quit)
-        quitAct.setShortcut("C")
-        quitAct.setStatusTip("Fermer la fenêtre")
+
+        quitAct = QAction("Quitter",self)
+        quitAct.triggered.connect(self.exit)
+        quitAct.setShortcut('ctrl+Q')
+        quitAct.setStatusTip('Quitter')
+
+
 
         fichierMenu.addAction(openAct)
         fichierMenu.addAction(recAct)
+        fichierMenu.addSeparator()
         fichierMenu.addAction(quitAct)
 
-        self.setGeometry(300, 300, 1280, 720)
+        self.setMinimumSize(1280, 720)
 
         self.setWindowTitle('RAVI 2')
+
+        self.myWidget = MyTableWidget(self)
+
+        self.setCentralWidget(self.myWidget)
 
         self.show()
 
@@ -83,5 +53,56 @@ class Gui(QMainWindow):
     def rec(self):
         print("rec")
 
-    def quit(self):
-        print("quit")
+    def exit(self):
+        print("exit")
+        self.quit
+
+
+class MyTableWidget(QWidget):
+
+    def __init__(self, parent):
+        super(QWidget, self).__init__(parent)
+        self.layout = QVBoxLayout(self)
+
+        # Initialize tab screen
+        self.tabs = QTabWidget()
+        self.tab1 = QWidget()
+        self.tab2 = QWidget()
+
+
+        # Add tabs
+        self.tabs.addTab(self.tab1, "Onglet 1")
+        self.tabs.addTab(self.tab2, "Onglet 2")
+
+        self.tab1.layout = QVBoxLayout(self)
+        openButton = QPushButton("Nom ?")
+        openButton.clicked.connect(self.openClick)
+
+        self.tab1.layout.addWidget(openButton)
+        self.tab1.setLayout(self.tab1.layout)
+        self.tab1.setStyleSheet("background-image: url(./flooop.png); background-attachment: fixed;")
+
+        #Tab 2
+        self.tableWidget = QTableWidget()
+        self.tableWidget.setRowCount(6)
+        self.tableWidget.setColumnCount(2)
+
+        self.tab2.layout = QVBoxLayout(self)
+        self.tab2.addWidget(self.tableWidget)
+        self.tab2.setLayout(self.tab2.Layout)
+
+        self.tableWidget.setItem(0, 0, QTableWidgetItem("Nom:"))
+        self.tableWidget.setItem(1, 0, QTableWidgetItem("Prenom:"))
+        self.tableWidget.setItem(2, 0, QTableWidgetItem("Date de naissance:"))
+        self.tableWidget.setItem(3, 0, QTableWidgetItem("Sexe:"))
+        self.tableWidget.setItem(4, 0, QTableWidgetItem("Taille:"))
+        self.tableWidget.setItem(5, 0, QTableWidgetItem("Poid:"))
+
+        # Add tabs to widget
+        self.layout.addWidget(self.tabs)
+        self.setLayout(self.layout)
+
+    def openClick(self):
+        print("click")
+        nom,type = QInputDialog.getText(self,"input dialog","Votre Nom ?",QLineEdit.Normal,"")
+        print(nom)
