@@ -81,7 +81,7 @@ class MyTableWidget(QWidget):
 
         self.tab1.layout.addWidget(openButton)
         self.tab1.setLayout(self.tab1.layout)
-        self.tab1.setStyleSheet("background-image: url(./flooop.png); background-attachment: fixed;")
+        self.tab1.setStyleSheet("background-image: url(./Picture_Onglet_1.jpg); background-attachment: fixed;")
 
         # Tab 2:
         self.tableWidget = QTableWidget()
@@ -92,6 +92,7 @@ class MyTableWidget(QWidget):
         self.tab2.layout.addWidget(self.tableWidget)
         self.tab2.setLayout(self.tab2.layout)
 
+        #Tableau colonne gauche
         self.tableWidget.setItem(0, 0, QTableWidgetItem("nom:"))
         self.tableWidget.setItem(1, 0, QTableWidgetItem("Prenom:"))
         self.tableWidget.setItem(2, 0, QTableWidgetItem("Date de naissance:"))
@@ -99,9 +100,18 @@ class MyTableWidget(QWidget):
         self.tableWidget.setItem(4, 0, QTableWidgetItem("Taille:"))
         self.tableWidget.setItem(5, 0, QTableWidgetItem("Poid:"))
 
+        saveButton = QPushButton("Sauvegarde")
+        saveButton.clicked.connect(self.saveClick)
+        self.tab2.layout.addWidget(saveButton)
+
+        self.tab2.setLayout(self.tab2.layout)
+
         # Add tabs to widget
         self.layout.addWidget(self.tabs)
         self.setLayout(self.layout)
+
+    def saveClick(self):
+        print("save")
 
     def openClick(self):
         print("click")
